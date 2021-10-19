@@ -17,7 +17,12 @@ class TodoListTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->list = $this->createTodoList();
+
+        $user = $this->authUser();
+        $this->list = $this->createTodoList([
+            'name' => 'my list',
+            'user_id' => $user->id
+        ]);
     }
 
 
@@ -27,7 +32,8 @@ class TodoListTest extends TestCase
 
         //preperation
         //TodoList::factory()->count(2)->create(); 
-
+        $this->createTodoList();
+        
         //action
         $response = $this->getJson(route('todo-list.index'));
 

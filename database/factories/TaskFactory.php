@@ -27,7 +27,7 @@ class TaskFactory extends Factory
             'todo_list_id' => function(){
                 return TodoList::factory()->create()->id;
             },
-            // 'description' => $this->faker->paragraph
+            'description' => $this->faker->paragraph
         ];
     }
 }

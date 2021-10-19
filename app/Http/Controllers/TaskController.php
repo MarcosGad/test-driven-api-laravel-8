@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\TodoList;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\TaskRequest;
 
 
 class TaskController extends Controller
@@ -17,11 +18,11 @@ class TaskController extends Controller
         return response($tasks);
     }
 
-    public function store(Request $request, TodoList $todo_list)
+    public function store(TaskRequest $request, TodoList $todo_list)
     {
        //$request['todo_list_id'] = $todo_list->id;
        //return Task::create($request->all());
-       return $todo_list->tasks()->create($request->all());
+       return $todo_list->tasks()->create($request->validated());
        
     }
 
