@@ -7,6 +7,7 @@ use App\Models\TodoList;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\Label;
+use App\Models\WebService;
 use Laravel\Sanctum\Sanctum;
 
 
@@ -45,5 +46,10 @@ abstract class TestCase extends BaseTestCase
     public function createLabel($args = [])
     {
         return Label::factory()->create($args);
+    }
+
+    public function createWebService($args = [])
+    {
+        return WebService::factory()->create($args);
     }
 }
