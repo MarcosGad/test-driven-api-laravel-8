@@ -59,6 +59,29 @@ class WebServiceController extends Controller
 
         Storage::deleteDirectory('public/temp');
         return response('Uploaded', Response::HTTP_CREATED);
+      
+
+        // $tasks = Task::where('created_at', '>=', now()->subDays(7))->get();
+        // $jsonFileName = 'task_dump.json';
+        // Storage::put("/public/temp/$jsonFileName", $tasks->toJson());
+        // $zipFileName = Zipper::createZipOf($jsonFileName);
+
+        // $client = new Client();
+        // $client->setAccessToken($web_service->token['access_token']);
+        // $service = new Drive($client);
+        // $file = new DriveFile();
+
+        // $file->setName("tasks.zip");
+        // $service->files->create(
+        //     $file,
+        //     array(
+        //         'data' => file_get_contents($zipFileName),
+        //         'mimeType' => 'application/octet-stream',
+        //         'uploadType' => 'multipart'
+        //     )
+        // );
+
+        // return response('Uploaded', Response::HTTP_CREATED);
     }
 
 }
