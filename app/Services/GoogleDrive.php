@@ -24,7 +24,7 @@ class GoogleDrive
         $service = new Drive($this->client);
         $file = new DriveFile();
         
-        $file->setName("tasks.zip");
+        $file->setName("tasks.zip"); //add
         $service->files->create(
             $file,
             array(
