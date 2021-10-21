@@ -55,7 +55,7 @@ class TodoListTest extends TestCase
     {
         $response = $this->postJson(route('todo-list.store'), ['name' => $this->list->name])
             ->assertCreated()
-            ->json();
+            ->json('data');
 
         $this->assertEquals($this->list->name, $response['name']);
         $this->assertDatabaseHas('todo_lists', ['name' => $this->list->name]);

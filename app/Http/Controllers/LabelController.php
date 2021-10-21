@@ -6,13 +6,16 @@ use App\Http\Requests\LabelRequest;
 use App\Models\Label;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Resources\LabelResource;
+
 
 class LabelController extends Controller
 {
     public function store(LabelRequest $request)
     {
         //return Label::create($request->validated());
-        return auth()->user()->labels()->create($request->validated());
+        $label = auth()->user()->labels()->create($request->validated());
+        return new LabelResource($label);
     }
 
     public function destroy(Label $label)
@@ -23,11 +26,13 @@ class LabelController extends Controller
 
     public function update(Label $label, LabelRequest $request)
     {
-        return $label->update($request->validated());
+        $label->update($request->validated());
+        return new LabelResource($label);
     }
 
     public function index()
     {
-        return auth()->user()->labels;
+        $labels = auth()->user()->labels;
+        return LabelResource::collection($labels);
     }
 }

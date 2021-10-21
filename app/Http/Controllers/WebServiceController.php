@@ -13,6 +13,7 @@ use Google\Service\Drive\DriveFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Resources\TaskResource;
 use ZipArchive;
 
 class WebServiceController extends Controller
@@ -50,7 +51,8 @@ class WebServiceController extends Controller
     {
         $tasks = Task::where('created_at', '>=', now()->subDays(7))->get();
         $jsonFileName = 'task_dump.json';
-        Storage::put("/public/temp/$jsonFileName", $tasks->toJson());
+        //Storage::put("/public/temp/$jsonFileName", $tasks->toJson());
+        Storage::put("/public/temp/$jsonFileName", TaskResource::collection($tasks)->toJson());
 
         $zipFileName = Zipper::createZipOf($jsonFileName);
 
